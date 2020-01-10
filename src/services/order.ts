@@ -12,7 +12,6 @@ export class OrderService {
   }
 
   public save(model: IOrder): Observable<IOrder> {
-    console.log('model ->', typeof model.amount);
     return this.apiService.post('/order', model);
   }
 

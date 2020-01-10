@@ -58,12 +58,12 @@ const OrderFormDialog = memo((props: IProps) => {
         switchMap(() => orderService.save(model as IOrder)),
         tap(
           order => {
-            Toast.show(`${order.description} foi salvo${model.id ? '' : ', um email foi enviado com a senha'}`);
+            Toast.show(`${order.description} foi salvo`);
             props.onComplete(order);
             setLoading(false);
           },
           err => {
-            Toast.error(err.message === 'email-unavailable' ? 'Email já utlizado' : err);
+            Toast.error(err.message);
             setLoading(false);
           }
         ),
@@ -100,7 +100,7 @@ const OrderFormDialog = memo((props: IProps) => {
               label='Quantidade'
               disabled={loading}
               value={model.amount}
-              validation='required'
+              validation='required|numeric'
               onChange={setModelProp('amount', (model, v) => (model.amount = v))}
             />
 
@@ -108,7 +108,7 @@ const OrderFormDialog = memo((props: IProps) => {
               label='Valor'
               disabled={loading}
               value={model.value}
-              validation='required'
+              validation='required|numeric'
               onChange={setModelProp('value', (model, v) => (model.value = v))}
             />
           </Fragment>
