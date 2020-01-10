@@ -2,8 +2,8 @@ export default interface IOrder {
   id?: number;
   userId?: number;
   description: string;
-  amount: number;
-  value: number;
+  amount: string;
+  value: string;
 
   createdDate?: Date;
   updatedDate?: Date;

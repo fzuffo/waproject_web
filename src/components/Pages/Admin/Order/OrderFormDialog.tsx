@@ -6,7 +6,6 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Slide from '@material-ui/core/Slide';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import Typography from '@material-ui/core/Typography';
 import FormValidation from '@react-form-fields/material-ui/components/FormValidation';
 import FieldText from '@react-form-fields/material-ui/components/Text';
 import Toast from 'components/Shared/Toast';
@@ -41,23 +40,10 @@ const OrderFormDialog = memo((props: IProps) => {
   const classes = useStyle(props);
 
   const [model, setModelProp, setModel, , clearModel] = useModel<IOrder>();
-  const [loading, setLoading] = useState<boolean>(true);
-
-  // const [roles, rolesError, , retryRoles] = useRetryableObservable<Array<IUserRole>>(() => {
-  //   setLoading(true);
-
-  //   return userService.roles().pipe(
-  //     tap(
-  //       () => setLoading(false),
-  //       () => setLoading(false)
-  //     ),
-  //     logError()
-  //   );
-  // }, []);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleEnter = useCallback(() => {
     setModel({ ...props.order });
-    // retryRoles();
   }, [props.order, setModel]);
 
   const handleExit = useCallback(() => {
@@ -99,7 +85,7 @@ const OrderFormDialog = memo((props: IProps) => {
       {loading && <LinearProgress color='secondary' />}
 
       <FormValidation onSubmit={onSubmit}>
-        <DialogTitle>{model.id ? 'Editar' : 'Novo'} Pedidos</DialogTitle>
+        <DialogTitle>{model.id ? 'Editar' : 'Novo'} Pedido</DialogTitle>
         <DialogContent className={classes.content}>
           <Fragment>
             <FieldText
@@ -125,29 +111,6 @@ const OrderFormDialog = memo((props: IProps) => {
               validation='required'
               onChange={setModelProp('value', (model, v) => (model.value = v))}
             />
-
-            <Typography variant='subtitle1' className={classes.heading}>
-              Acesso
-            </Typography>
-
-            {/* <FieldHidden value={model.roles.length} validation='required|numeric|min:1'>
-                <CustomMessage rules='min,required,numeric'>Selecione ao menos um</CustomMessage>
-              </FieldHidden> */}
-
-            {/* {(roles || []).map(role => (
-                <div key={role.role}>
-                  <FieldCheckbox
-                    helperText={role.description}
-                    checked={model.roles.includes(role.role)}
-                    label={role.name}
-                    onChange={setModelProp(`role-${role.role}`, model =>
-                      model.roles.includes(role.role)
-                        ? (model.roles = model.roles.filter(r => r !== role.role))
-                        : (model.roles = [...model.roles, role.role])
-                    )}
-                  />
-                </div>
-              ))} */}
           </Fragment>
         </DialogContent>
         <DialogActions>

@@ -69,6 +69,7 @@ const ListItem = memo((props: IProps) => {
     <TableRow>
       <TableCell>{order.description}</TableCell>
       <TableCell>{order.amount}</TableCell>
+      <TableCell>{order.value}</TableCell>
       <TableCellActions options={options} loading={loading} error={error} onDismissError={handleDismissError} />
     </TableRow>
   );
